@@ -10,6 +10,8 @@ Celem laboratorium było poddanie kolejnych pikseli obrazu przekształceniom pun
 - **Negatyw**
 - **Ściemnianie i rozjaśnianie obrazu**
 
+Wczytany obraz poddano tym operacjom. 
+
 **<h2 style="color:darkslategray;">Wykonanie laboratorium</h2>**
 
 
