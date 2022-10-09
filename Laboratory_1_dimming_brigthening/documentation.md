@@ -10,12 +10,16 @@ Celem laboratorium było poddanie kolejnych pikseli obrazu przekształceniom pun
 - **Negatyw**
 - **Ściemnianie i rozjaśnianie obrazu**
 
-Wczytany obraz poddano tym operacjom. 
 
 **<h2 style="color:darkslategray;">Wykonanie laboratorium</h2>**
 
+Wczytany obraz poddano operacjom ściemniania oraz rozjaśniania. Do łatwego aplikowania zmian utworzono prosty interfejs utworzony w języku Python z wykorzystaniem biblioteki Tkinter. Za pomocą suwaka można modyfikować wartość progu binaryzacji.
 
+Do wizualizacji danych wykorzystano bibliotekę Matplotlib oraz OpenCV. Wykorzystano cztery funkcje: **dimming/brightening** do przyciemniania oraz rozjaśniania i **threshold/reverse_threshold** do znajdywania progu binaryzacji. Dwie pierwsze funkcje zmieniają wszystkie elementy których wartość jest mniejsza/większa od wybranej, a dwie kolejne zmieniają wszytskie elementy których wartość nie jest równa zadanej.
+
+![image info](resources\screen_results.png)
+<div align="center"><em>Rys.1 Obraz otrzymany dla wyznaczonego progu binaryzacji. Dzięki takiemu rozwiązaniu łatwo rozróżnić wodę od lądu stałego.</em></div>
 
 **<h2 style="color:darkslategray;">Wnioski</h2>**
 
-<p></p>
+Na podstawie obserwacji wyników napisanego programu możemy stwierdzić, że wartość progu binaryzacji dla obrazu z zajęć wynosi **217**.
