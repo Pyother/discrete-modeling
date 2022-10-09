@@ -17,7 +17,9 @@ Wczytany obraz poddano operacjom ściemniania oraz rozjaśniania. Do łatwego ap
 
 Do wizualizacji danych wykorzystano bibliotekę Matplotlib oraz OpenCV. Wykorzystano cztery funkcje: **dimming/brightening** do przyciemniania oraz rozjaśniania i **threshold/reverse_threshold** do znajdywania progu binaryzacji. Dwie pierwsze funkcje zmieniają wszystkie elementy których wartość jest mniejsza/większa od wybranej, a dwie kolejne zmieniają wszytskie elementy których wartość nie jest równa zadanej.
 
-![image info](resources\screen_results.png)
+<div align="center">
+  <img src="https://github.com/Pyother/discrete_modeling/blob/9a86ccf2d415dcdc055588c3969ec3cc7a79ffef/Laboratory_1_dimming_brigthening/resources/screen_results.png">
+</div>
 <div align="center"><em>Rys.1 Obraz otrzymany dla wyznaczonego progu binaryzacji. Dzięki takiemu rozwiązaniu łatwo rozróżnić wodę od lądu stałego.</em></div>
 
 **<h2 style="color:darkslategray;">Wnioski</h2>**
