@@ -1,4 +1,5 @@
 import arcade
+import utils.oscillator as osc
 
 ROW_COUNT = 25
 COLUMN_COUNT = 25
@@ -44,7 +45,10 @@ class MyGame(arcade.Window):
         column = int(x // (WIDTH + MARGIN))
         row = int(y // (HEIGHT + MARGIN))
 
-        print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
+        print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({column}, {row})")
+
+        oscilliator = osc.Oscilliator(column, row)
+        oscilliator.__str__()
 
         if row < ROW_COUNT and column < COLUMN_COUNT:
 
