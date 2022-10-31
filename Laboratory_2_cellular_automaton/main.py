@@ -10,6 +10,7 @@ MARGIN = 1
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "Cellular Automata"
+TYPE = "oscilliator"
 
 class GameView(arcade.View):
 
@@ -18,11 +19,24 @@ class GameView(arcade.View):
         super().__init__()
 
         self.grid = []
+        self.cells = []
+
         for row in range(ROW_COUNT):
             
             self.grid.append([])
             for column in range(COLUMN_COUNT):
                 self.grid[row].append(0)
+            
+        for row in range(ROW_COUNT):
+            
+            self.cells.append([])
+            for column in range(COLUMN_COUNT):
+                self.cells[row].append(osc.Oscilliator(row, column))
+
+        for row in range(ROW_COUNT):
+            
+            for column in range(COLUMN_COUNT):
+                self.cells[row][column].__str__() 
 
     def on_draw(self):
 
@@ -53,12 +67,14 @@ class GameView(arcade.View):
 
         if row < ROW_COUNT and column < COLUMN_COUNT:
 
-            if self.grid[row][column] == 0:
-                self.grid[row][column] = 1
-                self.grid[row+1][column] = 1
-                self.grid[row-1][column] = 1
-            else:
-                self.grid[row][column] = 0
+            if TYPE == "oscilliator":
+
+                if self.grid[row][column] == 0:
+                    self.grid[row][column] = 1
+                    self.grid[row+1][column] = 1
+                    self.grid[row-1][column] = 1
+                else:
+                    self.grid[row][column] = 0
 
 class InstructionView(arcade.View):
 
