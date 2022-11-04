@@ -1,6 +1,7 @@
 import arcade
 import time
 import utils.oscillator as osc
+import utils.cell as cll
 
 ROW_COUNT = 25
 COLUMN_COUNT = 25
@@ -18,24 +19,14 @@ class GameView(arcade.View):
 
         super().__init__()
 
-        self.grid = []
         self.cells = []
-
-        for row in range(ROW_COUNT):
-            
-            self.grid.append([])
-            for column in range(COLUMN_COUNT):
-                self.grid[row].append(0)
+        self.total_time = 0.0
             
         for row in range(ROW_COUNT):
             
             self.cells.append([])
             for column in range(COLUMN_COUNT):
-                self.cells[row].append(osc.Oscilliator(row, column))
-
-        for row in range(ROW_COUNT):
-            
-            for column in range(COLUMN_COUNT):
+                self.cells[row].append(cll.Cell(row, column))
                 self.cells[row][column].__str__() 
 
     def on_draw(self):
@@ -45,10 +36,10 @@ class GameView(arcade.View):
         for row in range(ROW_COUNT):
             for column in range(COLUMN_COUNT):
                 
-                if self.grid[row][column] == 1:
-                    color = arcade.color.COOL_BLACK
+                if self.cells[row][column].value == 1:
+                    color = arcade.color.CAROLINA_BLUE
                 else:
-                    color = arcade.color.WHITE
+                    color = arcade.color.BLACK
 
                 x = (MARGIN + WIDTH) * column + MARGIN + WIDTH // 2
                 y = (MARGIN + HEIGHT) * row + MARGIN + HEIGHT // 2
@@ -62,19 +53,23 @@ class GameView(arcade.View):
 
         print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({column}, {row})")
 
-        oscilliator = osc.Oscilliator(column, row)
-        oscilliator.__str__()
-
         if row < ROW_COUNT and column < COLUMN_COUNT:
 
             if TYPE == "oscilliator":
 
-                if self.grid[row][column] == 0:
-                    self.grid[row][column] = 1
-                    self.grid[row+1][column] = 1
-                    self.grid[row-1][column] = 1
+                if self.cells[row][column].value == 0:
+
+                    self.cells[row][column].fill()
+                    self.cells[row-1][column].fill()
+                    self.cells[row+1][column].fill()
+        
                 else:
-                    self.grid[row][column] = 0
+                    self.cells[row][column].empty()
+
+    def on_update(self, delta_time):
+        
+        self.total_time += delta_time
+        seconds = int(self.total_time) % 60
 
 class InstructionView(arcade.View):
 
