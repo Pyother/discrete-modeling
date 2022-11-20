@@ -20,14 +20,15 @@ class GameView(arcade.View):
         super().__init__()
 
         self.cells = []
+        self.new_cells= []
         self.total_time = 0.0
             
         for row in range(ROW_COUNT):
-            
             self.cells.append([])
+            self.new_cells.append([])
             for column in range(COLUMN_COUNT):
                 self.cells[row].append(cll.Cell(row, column))
-                self.cells[row][column].__str__() 
+                self.new_cells[row].append(cll.Cell(row, column))
 
     def on_draw(self):
 
@@ -60,7 +61,7 @@ class GameView(arcade.View):
                 if self.cells[row][column].value == 0:
 
                     self.cells[row][column].fill()
-                    self.cells[row-1][column].fill()
+                    self.cells[row-1][column].fill()    
                     self.cells[row+1][column].fill()
         
                 else:
@@ -70,6 +71,16 @@ class GameView(arcade.View):
         
         self.total_time += delta_time
         seconds = int(self.total_time) % 60
+    
+    def on_key_press(self, symbol: int, modifiers: int):
+
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+
+                if self.cells[row][column].value == 0:
+                    pass
+
+        return super().on_key_press(symbol, modifiers)
 
 class InstructionView(arcade.View):
 
@@ -90,6 +101,7 @@ class InstructionView(arcade.View):
         
         game_view = GameView()
         self.window.show_view(game_view)
+    
 
 def main():
 

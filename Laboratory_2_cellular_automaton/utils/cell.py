@@ -14,7 +14,8 @@ class Cell:
 
         self.value = 1
 
+        
 
-    def __str__(self) -> str:
-        print(f"Cell coordinates: ({self.x}, {self.y}) | Cell value: ({self.value})")
+
+
 
