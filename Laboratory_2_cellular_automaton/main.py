@@ -67,11 +67,33 @@ class GameView(arcade.View):
                 else:
                     self.cells[row][column].empty()
 
-    def on_update(self, delta_time):
+    def cell_check(cell, row, column):
+
+        position = []
+        if row-1 >= 0 and column-1 >= 0: position.append(cell[row-1][column-1])
+        if row-1 >= 0: position.append(cell[row-1][column])
+        if row-1 >= 0 and column+1 <= 24: position.append(cell[row-1][column+1])
+        if column+1 <= 24:position.append(cell[row][column+1])
+        if row+1 <= 24 and column <= 24: position.append(cell[row+1][column+1])
+        if row+1 <= 24: position.append(cell[row+1][column])
+        if row+1 <= 24 and column-1 >= 0: position.append(cell[row+1][column-1])
+        if column-1 >=0: position.append(cell[row][column-1])
         
-        self.total_time += delta_time
-        seconds = int(self.total_time) % 60
-    
+        counter = 0
+        for i in len(position):
+            if position[i].value == 1:
+                counter += counter
+                
+        if cell[row][column].value == 0:
+            if counter <= 2: 
+                return(0)
+            else: 
+                return(1) 
+        else:
+            if counter <= 1: return(0)
+            elif counter == 2 or counter == 3: return(1)
+            else: return(0)
+        
     def on_key_press(self, key, modifiers):
 
         if key == arcade.key.SPACE:
