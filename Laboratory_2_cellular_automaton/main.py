@@ -72,24 +72,28 @@ class GameView(arcade.View):
         self.total_time += delta_time
         seconds = int(self.total_time) % 60
     
-    def on_key_press(self, symbol: int, modifiers: int):
+    def on_key_press(self, key, modifiers):
 
-        for row in range(ROW_COUNT):
-            for column in range(COLUMN_COUNT):
-
-                if self.cells[row][column].value == 0:
-                    pass
-
-        return super().on_key_press(symbol, modifiers)
+        if key == arcade.key.SPACE:
+            for rows in range(ROW_COUNT):
+                for columns in range(COLUMN_COUNT):
+                    self.cells[rows][columns].empty()
+        
+        if key == arcade.key.ESCAPE:
+            arcade.exit()
 
 class InstructionView(arcade.View):
 
     def on_draw(self):
         
         self.clear()
-        arcade.draw_text("Cellular Automata", self.window.width / 2, self.window.height / 2,
+        arcade.draw_text("Cellular Automata", self.window.width / 2, self.window.height / 2+70,
                          arcade.color.WHITE, font_size=40, anchor_x="center")
-        arcade.draw_text("Click to advance", self.window.width / 2, self.window.height / 2-75,
+        arcade.draw_text("Click to advance", self.window.width / 2, self.window.height / 2-50,
+                         arcade.color.WHITE, font_size=15, anchor_x="center")
+        arcade.draw_text("Press SPACE to do next move", self.window.width / 2, self.window.height / 2-100,
+                         arcade.color.WHITE, font_size=15, anchor_x="center")
+        arcade.draw_text("Press ESCAPE to exit", self.window.width / 2, self.window.height / 2-150,
                          arcade.color.WHITE, font_size=15, anchor_x="center")
 
     def on_show_view(self):
@@ -102,7 +106,6 @@ class InstructionView(arcade.View):
         game_view = GameView()
         self.window.show_view(game_view)
     
-
 def main():
 
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
