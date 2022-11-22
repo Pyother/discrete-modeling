@@ -67,13 +67,13 @@ class GameView(arcade.View):
                 else:
                     self.cells[row][column].empty()
 
-    def cell_check(cell, row, column):
+    def cell_check(self, cell, row, column):
 
         position = []
         if row-1 >= 0 and column-1 >= 0: position.append(cell[row-1][column-1])
         if row-1 >= 0: position.append(cell[row-1][column])
         if row-1 >= 0 and column+1 <= 24: position.append(cell[row-1][column+1])
-        if column+1 <= 24:position.append(cell[row][column+1])
+        if column+1 <= 24: position.append(cell[row][column+1])
         if row+1 <= 24 and column <= 24: position.append(cell[row+1][column+1])
         if row+1 <= 24: position.append(cell[row+1][column])
         if row+1 <= 24 and column-1 >= 0: position.append(cell[row+1][column-1])
@@ -97,9 +97,12 @@ class GameView(arcade.View):
     def on_key_press(self, key, modifiers):
 
         if key == arcade.key.SPACE:
-            for rows in range(ROW_COUNT):
-                for columns in range(COLUMN_COUNT):
-                    self.cells[rows][columns].empty()
+            for row in range(ROW_COUNT):
+                for column in range(COLUMN_COUNT):
+                    if self.cell_check(self.cells[row][column], row, column) == 1: 
+                        self.cells[row][column].fill()
+                    else:
+                        self.cells[row][column].empty()
         
         if key == arcade.key.ESCAPE:
             arcade.exit()
